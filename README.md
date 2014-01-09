@@ -7,6 +7,9 @@ The actual controllers should just be simple placeholders.
 
 Grapic assets and mockups will be provided in this repo.
 
+![Mockup of the buttons](button-mockup.jpg)
+
+
 Requirements
 ------------
 
