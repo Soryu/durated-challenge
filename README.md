@@ -5,7 +5,7 @@ The challenge is to create a navigation button with six possible sections. Three
 
 The actual controllers should just be simple placeholders. 
 
-Grapic assets and mockups will be provided in this repo.
+Graphic assets and mockups will be provided in this repo.
 
 ![Mockup of the buttons](button-mockup.jpg)
 
