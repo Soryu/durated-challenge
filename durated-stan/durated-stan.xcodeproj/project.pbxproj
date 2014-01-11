@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DA2DB3E31881672C0014042C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3E21881672C0014042C /* Foundation.framework */; };
+		DA2DB3E51881672C0014042C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3E41881672C0014042C /* CoreGraphics.framework */; };
+		DA2DB3E71881672C0014042C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3E61881672C0014042C /* UIKit.framework */; };
+		DA2DB3ED1881672C0014042C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB3EB1881672C0014042C /* InfoPlist.strings */; };
+		DA2DB3EF1881672C0014042C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB3EE1881672C0014042C /* main.m */; };
+		DA2DB3F51881672C0014042C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB3F41881672C0014042C /* Images.xcassets */; };
+		DA2DB3FC1881672C0014042C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3FB1881672C0014042C /* XCTest.framework */; };
+		DA2DB3FD1881672C0014042C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3E21881672C0014042C /* Foundation.framework */; };
+		DA2DB3FE1881672C0014042C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2DB3E61881672C0014042C /* UIKit.framework */; };
+		DA2DB4061881672C0014042C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB4041881672C0014042C /* InfoPlist.strings */; };
+		DA2DB4081881672C0014042C /* durated_stanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4071881672C0014042C /* durated_stanTests.m */; };
+		DA2DB415188168510014042C /* SERAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB414188168510014042C /* SERAppDelegate.m */; };
+		DA2DB43D18816A040014042C /* SERMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB43C18816A040014042C /* SERMarketViewController.m */; };
+		DA2DB44118816ABC0014042C /* SERPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB44018816ABC0014042C /* SERPostsViewController.m */; };
+		DA2DB44518816AED0014042C /* SERProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB44418816AED0014042C /* SERProfileViewController.m */; };
+		DA2DB44918816B270014042C /* SERBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB44818816B270014042C /* SERBaseViewController.m */; };
+		DA2DB45D188170310014042C /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB44B188170310014042C /* camera.png */; };
+		DA2DB45E188170310014042C /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB44C188170310014042C /* camera@2x.png */; };
+		DA2DB45F188170310014042C /* durated-button.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB44D188170310014042C /* durated-button.png */; };
+		DA2DB460188170310014042C /* durated-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB44E188170310014042C /* durated-button@2x.png */; };
+		DA2DB461188170310014042C /* invite.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB44F188170310014042C /* invite.png */; };
+		DA2DB462188170310014042C /* invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB450188170310014042C /* invite@2x.png */; };
+		DA2DB463188170310014042C /* market.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB451188170310014042C /* market.png */; };
+		DA2DB464188170310014042C /* market@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB452188170310014042C /* market@2x.png */; };
+		DA2DB465188170310014042C /* posts.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB453188170310014042C /* posts.png */; };
+		DA2DB466188170310014042C /* posts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB454188170310014042C /* posts@2x.png */; };
+		DA2DB467188170310014042C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB455188170310014042C /* profile.png */; };
+		DA2DB468188170310014042C /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB456188170310014042C /* profile@2x.png */; };
+		DA2DB469188170310014042C /* wishlist.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB457188170310014042C /* wishlist.png */; };
+		DA2DB46A188170310014042C /* wishlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB458188170310014042C /* wishlist@2x.png */; };
+		DA2DB46B188170310014042C /* mock-market@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45A188170310014042C /* mock-market@2x.jpg */; };
+		DA2DB46C188170310014042C /* mock-posts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45B188170310014042C /* mock-posts@2x.png */; };
+		DA2DB46D188170310014042C /* mock-profile@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45C188170310014042C /* mock-profile@2x.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA2DB3FF1881672C0014042C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA2DB3D71881672C0014042C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA2DB3DE1881672C0014042C;
+			remoteInfo = "durated-stan";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DA2DB3DF1881672C0014042C /* durated-stan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "durated-stan.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2DB3E21881672C0014042C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DA2DB3E41881672C0014042C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DA2DB3E61881672C0014042C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DA2DB3EA1881672C0014042C /* durated-stan-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "durated-stan-Info.plist"; sourceTree = "<group>"; };
+		DA2DB3EC1881672C0014042C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA2DB3EE1881672C0014042C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DA2DB3F01881672C0014042C /* durated-stan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "durated-stan-Prefix.pch"; sourceTree = "<group>"; };
+		DA2DB3F41881672C0014042C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DA2DB3FA1881672C0014042C /* durated-stanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "durated-stanTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2DB3FB1881672C0014042C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DA2DB4031881672C0014042C /* durated-stanTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "durated-stanTests-Info.plist"; sourceTree = "<group>"; };
+		DA2DB4051881672C0014042C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA2DB4071881672C0014042C /* durated_stanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = durated_stanTests.m; sourceTree = "<group>"; };
+		DA2DB413188168510014042C /* SERAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SERAppDelegate.h; sourceTree = "<group>"; };
+		DA2DB414188168510014042C /* SERAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SERAppDelegate.m; sourceTree = "<group>"; };
+		DA2DB43B18816A040014042C /* SERMarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERMarketViewController.h; path = Market/SERMarketViewController.h; sourceTree = "<group>"; };
+		DA2DB43C18816A040014042C /* SERMarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERMarketViewController.m; path = Market/SERMarketViewController.m; sourceTree = "<group>"; };
+		DA2DB43F18816ABC0014042C /* SERPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERPostsViewController.h; path = Posts/SERPostsViewController.h; sourceTree = "<group>"; };
+		DA2DB44018816ABC0014042C /* SERPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERPostsViewController.m; path = Posts/SERPostsViewController.m; sourceTree = "<group>"; };
+		DA2DB44318816AED0014042C /* SERProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERProfileViewController.h; path = Profile/SERProfileViewController.h; sourceTree = "<group>"; };
+		DA2DB44418816AED0014042C /* SERProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERProfileViewController.m; path = Profile/SERProfileViewController.m; sourceTree = "<group>"; };
+		DA2DB44718816B270014042C /* SERBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERBaseViewController.h; path = Base/SERBaseViewController.h; sourceTree = "<group>"; };
+		DA2DB44818816B270014042C /* SERBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERBaseViewController.m; path = Base/SERBaseViewController.m; sourceTree = "<group>"; };
+		DA2DB44B188170310014042C /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		DA2DB44C188170310014042C /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		DA2DB44D188170310014042C /* durated-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button.png"; sourceTree = "<group>"; };
+		DA2DB44E188170310014042C /* durated-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button@2x.png"; sourceTree = "<group>"; };
+		DA2DB44F188170310014042C /* invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite.png; sourceTree = "<group>"; };
+		DA2DB450188170310014042C /* invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite@2x.png"; sourceTree = "<group>"; };
+		DA2DB451188170310014042C /* market.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = market.png; sourceTree = "<group>"; };
+		DA2DB452188170310014042C /* market@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "market@2x.png"; sourceTree = "<group>"; };
+		DA2DB453188170310014042C /* posts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posts.png; sourceTree = "<group>"; };
+		DA2DB454188170310014042C /* posts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posts@2x.png"; sourceTree = "<group>"; };
+		DA2DB455188170310014042C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		DA2DB456188170310014042C /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
+		DA2DB457188170310014042C /* wishlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wishlist.png; sourceTree = "<group>"; };
+		DA2DB458188170310014042C /* wishlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wishlist@2x.png"; sourceTree = "<group>"; };
+		DA2DB45A188170310014042C /* mock-market@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mock-market@2x.jpg"; sourceTree = "<group>"; };
+		DA2DB45B188170310014042C /* mock-posts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mock-posts@2x.png"; sourceTree = "<group>"; };
+		DA2DB45C188170310014042C /* mock-profile@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mock-profile@2x.jpg"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA2DB3DC1881672C0014042C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB3E51881672C0014042C /* CoreGraphics.framework in Frameworks */,
+				DA2DB3E71881672C0014042C /* UIKit.framework in Frameworks */,
+				DA2DB3E31881672C0014042C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA2DB3F71881672C0014042C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB3FC1881672C0014042C /* XCTest.framework in Frameworks */,
+				DA2DB3FE1881672C0014042C /* UIKit.framework in Frameworks */,
+				DA2DB3FD1881672C0014042C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DA2DB3D61881672C0014042C = {
+			isa = PBXGroup;
+			children = (
+				DA2DB3E81881672C0014042C /* durated-stan */,
+				DA2DB4011881672C0014042C /* durated-stanTests */,
+				DA2DB3E11881672C0014042C /* Frameworks */,
+				DA2DB3E01881672C0014042C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA2DB3E01881672C0014042C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB3DF1881672C0014042C /* durated-stan.app */,
+				DA2DB3FA1881672C0014042C /* durated-stanTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DA2DB3E11881672C0014042C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB3E21881672C0014042C /* Foundation.framework */,
+				DA2DB3E41881672C0014042C /* CoreGraphics.framework */,
+				DA2DB3E61881672C0014042C /* UIKit.framework */,
+				DA2DB3FB1881672C0014042C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA2DB3E81881672C0014042C /* durated-stan */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB412188168510014042C /* Sources */,
+				DA2DB411188168510014042C /* Resources */,
+				DA2DB3E91881672C0014042C /* Supporting Files */,
+				DA2DB3F41881672C0014042C /* Images.xcassets */,
+			);
+			path = "durated-stan";
+			sourceTree = "<group>";
+		};
+		DA2DB3E91881672C0014042C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB3EA1881672C0014042C /* durated-stan-Info.plist */,
+				DA2DB3EB1881672C0014042C /* InfoPlist.strings */,
+				DA2DB3EE1881672C0014042C /* main.m */,
+				DA2DB3F01881672C0014042C /* durated-stan-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA2DB4011881672C0014042C /* durated-stanTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB4071881672C0014042C /* durated_stanTests.m */,
+				DA2DB4021881672C0014042C /* Supporting Files */,
+			);
+			path = "durated-stanTests";
+			sourceTree = "<group>";
+		};
+		DA2DB4021881672C0014042C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB4031881672C0014042C /* durated-stanTests-Info.plist */,
+				DA2DB4041881672C0014042C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA2DB411188168510014042C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB44A188170310014042C /* assets */,
+				DA2DB459188170310014042C /* mocks */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DA2DB412188168510014042C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB44618816B0E0014042C /* Base */,
+				DA2DB43A188169E70014042C /* Market */,
+				DA2DB43E18816AAB0014042C /* Posts */,
+				DA2DB44218816ADD0014042C /* Profile */,
+				DA2DB413188168510014042C /* SERAppDelegate.h */,
+				DA2DB414188168510014042C /* SERAppDelegate.m */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		DA2DB43A188169E70014042C /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB43B18816A040014042C /* SERMarketViewController.h */,
+				DA2DB43C18816A040014042C /* SERMarketViewController.m */,
+			);
+			name = Market;
+			sourceTree = "<group>";
+		};
+		DA2DB43E18816AAB0014042C /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB43F18816ABC0014042C /* SERPostsViewController.h */,
+				DA2DB44018816ABC0014042C /* SERPostsViewController.m */,
+			);
+			name = Posts;
+			sourceTree = "<group>";
+		};
+		DA2DB44218816ADD0014042C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB44318816AED0014042C /* SERProfileViewController.h */,
+				DA2DB44418816AED0014042C /* SERProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		DA2DB44618816B0E0014042C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB44718816B270014042C /* SERBaseViewController.h */,
+				DA2DB44818816B270014042C /* SERBaseViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		DA2DB44A188170310014042C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB44B188170310014042C /* camera.png */,
+				DA2DB44C188170310014042C /* camera@2x.png */,
+				DA2DB44D188170310014042C /* durated-button.png */,
+				DA2DB44E188170310014042C /* durated-button@2x.png */,
+				DA2DB44F188170310014042C /* invite.png */,
+				DA2DB450188170310014042C /* invite@2x.png */,
+				DA2DB451188170310014042C /* market.png */,
+				DA2DB452188170310014042C /* market@2x.png */,
+				DA2DB453188170310014042C /* posts.png */,
+				DA2DB454188170310014042C /* posts@2x.png */,
+				DA2DB455188170310014042C /* profile.png */,
+				DA2DB456188170310014042C /* profile@2x.png */,
+				DA2DB457188170310014042C /* wishlist.png */,
+				DA2DB458188170310014042C /* wishlist@2x.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		DA2DB459188170310014042C /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB45A188170310014042C /* mock-market@2x.jpg */,
+				DA2DB45B188170310014042C /* mock-posts@2x.png */,
+				DA2DB45C188170310014042C /* mock-profile@2x.jpg */,
+			);
+			path = mocks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA2DB3DE1881672C0014042C /* durated-stan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA2DB40B1881672C0014042C /* Build configuration list for PBXNativeTarget "durated-stan" */;
+			buildPhases = (
+				DA2DB3DB1881672C0014042C /* Sources */,
+				DA2DB3DC1881672C0014042C /* Frameworks */,
+				DA2DB3DD1881672C0014042C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "durated-stan";
+			productName = "durated-stan";
+			productReference = DA2DB3DF1881672C0014042C /* durated-stan.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA2DB3F91881672C0014042C /* durated-stanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA2DB40E1881672C0014042C /* Build configuration list for PBXNativeTarget "durated-stanTests" */;
+			buildPhases = (
+				DA2DB3F61881672C0014042C /* Sources */,
+				DA2DB3F71881672C0014042C /* Frameworks */,
+				DA2DB3F81881672C0014042C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA2DB4001881672C0014042C /* PBXTargetDependency */,
+			);
+			name = "durated-stanTests";
+			productName = "durated-stanTests";
+			productReference = DA2DB3FA1881672C0014042C /* durated-stanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DA2DB3D71881672C0014042C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SER;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Stanley Rost";
+				TargetAttributes = {
+					DA2DB3F91881672C0014042C = {
+						TestTargetID = DA2DB3DE1881672C0014042C;
+					};
+				};
+			};
+			buildConfigurationList = DA2DB3DA1881672C0014042C /* Build configuration list for PBXProject "durated-stan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DA2DB3D61881672C0014042C;
+			productRefGroup = DA2DB3E01881672C0014042C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DA2DB3DE1881672C0014042C /* durated-stan */,
+				DA2DB3F91881672C0014042C /* durated-stanTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA2DB3DD1881672C0014042C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB467188170310014042C /* profile.png in Resources */,
+				DA2DB463188170310014042C /* market.png in Resources */,
+				DA2DB469188170310014042C /* wishlist.png in Resources */,
+				DA2DB46A188170310014042C /* wishlist@2x.png in Resources */,
+				DA2DB468188170310014042C /* profile@2x.png in Resources */,
+				DA2DB460188170310014042C /* durated-button@2x.png in Resources */,
+				DA2DB462188170310014042C /* invite@2x.png in Resources */,
+				DA2DB3ED1881672C0014042C /* InfoPlist.strings in Resources */,
+				DA2DB45F188170310014042C /* durated-button.png in Resources */,
+				DA2DB461188170310014042C /* invite.png in Resources */,
+				DA2DB46B188170310014042C /* mock-market@2x.jpg in Resources */,
+				DA2DB464188170310014042C /* market@2x.png in Resources */,
+				DA2DB45D188170310014042C /* camera.png in Resources */,
+				DA2DB465188170310014042C /* posts.png in Resources */,
+				DA2DB3F51881672C0014042C /* Images.xcassets in Resources */,
+				DA2DB466188170310014042C /* posts@2x.png in Resources */,
+				DA2DB45E188170310014042C /* camera@2x.png in Resources */,
+				DA2DB46C188170310014042C /* mock-posts@2x.png in Resources */,
+				DA2DB46D188170310014042C /* mock-profile@2x.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA2DB3F81881672C0014042C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB4061881672C0014042C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA2DB3DB1881672C0014042C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB44518816AED0014042C /* SERProfileViewController.m in Sources */,
+				DA2DB3EF1881672C0014042C /* main.m in Sources */,
+				DA2DB44918816B270014042C /* SERBaseViewController.m in Sources */,
+				DA2DB44118816ABC0014042C /* SERPostsViewController.m in Sources */,
+				DA2DB415188168510014042C /* SERAppDelegate.m in Sources */,
+				DA2DB43D18816A040014042C /* SERMarketViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA2DB3F61881672C0014042C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2DB4081881672C0014042C /* durated_stanTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA2DB4001881672C0014042C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA2DB3DE1881672C0014042C /* durated-stan */;
+			targetProxy = DA2DB3FF1881672C0014042C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA2DB3EB1881672C0014042C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA2DB3EC1881672C0014042C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA2DB4041881672C0014042C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA2DB4051881672C0014042C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA2DB4091881672C0014042C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DA2DB40A1881672C0014042C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DA2DB40C1881672C0014042C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "durated-stan/durated-stan-Prefix.pch";
+				INFOPLIST_FILE = "durated-stan/durated-stan-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DA2DB40D1881672C0014042C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "durated-stan/durated-stan-Prefix.pch";
+				INFOPLIST_FILE = "durated-stan/durated-stan-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DA2DB40F1881672C0014042C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/durated-stan.app/durated-stan";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "durated-stan/durated-stan-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "durated-stanTests/durated-stanTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		DA2DB4101881672C0014042C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/durated-stan.app/durated-stan";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "durated-stan/durated-stan-Prefix.pch";
+				INFOPLIST_FILE = "durated-stanTests/durated-stanTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA2DB3DA1881672C0014042C /* Build configuration list for PBXProject "durated-stan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA2DB4091881672C0014042C /* Debug */,
+				DA2DB40A1881672C0014042C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA2DB40B1881672C0014042C /* Build configuration list for PBXNativeTarget "durated-stan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA2DB40C1881672C0014042C /* Debug */,
+				DA2DB40D1881672C0014042C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA2DB40E1881672C0014042C /* Build configuration list for PBXNativeTarget "durated-stanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA2DB40F1881672C0014042C /* Debug */,
+				DA2DB4101881672C0014042C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DA2DB3D71881672C0014042C /* Project object */;
+}
