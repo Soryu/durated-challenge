@@ -6,13 +6,17 @@
 //  Copyright (c) 2014 Stanley Rost. All rights reserved.
 //
 
+@import AssetsLibrary;
+@import MobileCoreServices;
+
 #import "SERBaseViewController.h"
+
+#import "SERContentViewController.h"
+#import "SERDuratedMenu.h"
+#import "SERDuratedMenuItem.h"
 #import "SERMarketViewController.h"
 #import "SERPostsViewController.h"
 #import "SERProfileViewController.h"
-#import "SERDuratedMenu.h"
-#import "SERDuratedMenuItem.h"
-#import "SERContentViewController.h"
 
 static const CGFloat kAnimationDuration = 0.25;
 
@@ -22,7 +26,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   SERAnimationRight,
 };
 
-@interface SERBaseViewController () <SERDuratedMenuDelegate>
+@interface SERBaseViewController () <SERDuratedMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 // UI
 
@@ -56,8 +60,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   
   [self.view addSubview:self.menu];
 
-#warning DEBUG colored backgrounds for debugging
-  self.view.backgroundColor = [UIColor redColor];
+  self.view.backgroundColor = [UIColor whiteColor];
   self.contentView.backgroundColor = [UIColor greenColor];
 }
 
@@ -77,17 +80,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   {
     _menu = [[SERDuratedMenu alloc] initWithFrame:self.view.bounds];
     _menu.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
     _menu.image = [UIImage imageNamed:@"durated-button"];
-    _menu.items = @[
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile],
-      // [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"] tag:SERMenuTagMarket],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"] tag:SERMenuTagInvite],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"] tag:SERMenuTagCamera],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"] tag:SERMenuTagPosts],
-    ];
-    
     _menu.delegate = self;
   }
   
@@ -115,7 +108,6 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
     newController = self.marketController;
   }
   
-  DLog(@"switching to %@", newController);
   [self setContentController:newController animation:SERAnimationRight];
 }
 
@@ -214,7 +206,21 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 
 - (void)showCamera
 {
-  DLog(@".");
+  // FIXME this is not smooth at all
+  UIImagePickerController *picker = [UIImagePickerController new];
+
+  if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+  {
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+  }
+  else
+  {
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+  }
+  
+  picker.delegate = self;
+  picker.mediaTypes = @[(NSString *)kUTTypeImage];
+  [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (SERContentViewController *)defaultContentController
@@ -272,8 +278,6 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 
 - (void)menu:(SERDuratedMenu *)menu didSelectItem:(SERDuratedMenuItem *)item
 {
-  DLog(@"%d %@", item.tag, item);
-  
   if (item.tag == SERMenuTagCamera)
   {
     [self showCamera];
@@ -344,6 +348,18 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
   return UIStatusBarStyleLightContent;
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end
