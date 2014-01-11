@@ -8,7 +8,6 @@
 
 #import "SERDuratedMenu.h"
 #import "SERDuratedMenuItem.h"
-#import "UIColor+SER.h"
 
 static const CGFloat kButtonBottomMargin  = 20;
 static const CGFloat kAnimationDuration   = 0.15;
@@ -106,6 +105,11 @@ static const CGFloat kMinimumDisplacement = 33;
 {
   [self.mainButton setImage:image forState:UIControlStateNormal];
   [self.mainButton setTitle:image ? nil : @"Button" forState:UIControlStateNormal];
+}
+
+- (void)setHighlightedImage:(UIImage *)image
+{
+  [self.mainButton setImage:image forState:UIControlStateHighlighted];
 }
 
 #pragma mark Actions

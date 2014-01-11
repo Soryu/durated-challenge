@@ -36,4 +36,14 @@
   return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
++ (UIColor *)brandColor
+{
+  return [UIColor colorFromHexString:@"#EC5858"];
+}
+
++ (UIColor *)secondaryColor
+{
+  return [UIColor colorFromHexString:@"#506FBB"];
+}
+
 @end

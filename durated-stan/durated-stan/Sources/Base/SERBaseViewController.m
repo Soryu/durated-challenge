@@ -14,9 +14,11 @@
 #import "SERContentViewController.h"
 #import "SERDuratedMenu.h"
 #import "SERDuratedMenuItem.h"
+#import "SERInviteViewController.h"
 #import "SERMarketViewController.h"
 #import "SERPostsViewController.h"
 #import "SERProfileViewController.h"
+#import "SERWishlistViewController.h"
 
 static const CGFloat kAnimationDuration = 0.25;
 
@@ -81,6 +83,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
     _menu = [[SERDuratedMenu alloc] initWithFrame:self.view.bounds];
     _menu.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _menu.image = [UIImage imageNamed:@"durated-button"];
+    _menu.highlightedImage = [UIImage imageNamed:@"durated-button-highlighted"];
     _menu.delegate = self;
   }
   
@@ -172,36 +175,35 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
     }];
   }
   
+  SERDuratedMenuItem *firstItem = nil;
+  SERDuratedMenuItem *lastItem  = nil;
+  
   if (contentController.tag == SERMenuTagMarket)
   {
-    self.menu.items = @[
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"]  tag:SERMenuTagProfile],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]    tag:SERMenuTagPosts],
-    ];    
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]   tag:SERMenuTagPosts];
   }
   else if (contentController.tag == SERMenuTagProfile)
   {
-    self.menu.items = @[
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]    tag:SERMenuTagPosts],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]   tag:SERMenuTagMarket],
-    ];    
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]  tag:SERMenuTagPosts];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"] tag:SERMenuTagMarket];
   }
   else if (contentController.tag == SERMenuTagPosts)
   {
-    self.menu.items = @[
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]   tag:SERMenuTagMarket],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
-      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"]  tag:SERMenuTagProfile],
-    ];    
-  }  
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]  tag:SERMenuTagMarket];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile];
+  }
+  
+  NSAssert(firstItem && lastItem, @"items must be set");
+  
+  self.menu.items = @[
+    firstItem,
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+    lastItem,
+  ];
+
 }
 
 - (void)showCamera
@@ -284,11 +286,17 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   }
   else if (item.tag == SERMenuTagInvite)
   {
-    // TODO invite
+    SERInviteViewController *inviteController = [SERInviteViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:inviteController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+    [self addGenericDismissButtonToPresentedController:inviteController];
   }
   else if (item.tag == SERMenuTagWishlist)
   {
-    // TODO wishlist
+    SERWishlistViewController *wishlistController = [SERWishlistViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:wishlistController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+    [self addGenericDismissButtonToPresentedController:wishlistController];
   }
   else
   {
@@ -358,6 +366,19 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark Helpers
+
+- (void)addGenericDismissButtonToPresentedController:(UIViewController *)controller
+{
+  UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPresentedController:)];
+  [controller.navigationItem setLeftBarButtonItem:item];
+}
+
+- (void)dismissPresentedController:(id)sender
 {
   [self dismissViewControllerAnimated:YES completion:NULL];
 }

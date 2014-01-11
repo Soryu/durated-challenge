@@ -44,6 +44,10 @@
 		DA2DB4841881B6FF0014042C /* SERDuratedMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4831881B6FF0014042C /* SERDuratedMenuItem.m */; };
 		DA2DB4881881B9DF0014042C /* UIColor+SER.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4871881B9DF0014042C /* UIColor+SER.m */; };
 		DA2DB48B1881CEF50014042C /* SERContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB48A1881CEF50014042C /* SERContentViewController.m */; };
+		DA2DB4901881F7AC0014042C /* SERWishlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB48F1881F7AC0014042C /* SERWishlistViewController.m */; };
+		DA2DB4931881F7C50014042C /* SERInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4921881F7C50014042C /* SERInviteViewController.m */; };
+		DA2DB4961881FF050014042C /* durated-button-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB4941881FF050014042C /* durated-button-highlighted.png */; };
+		DA2DB4971881FF050014042C /* durated-button-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB4951881FF050014042C /* durated-button-highlighted@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +110,12 @@
 		DA2DB4871881B9DF0014042C /* UIColor+SER.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+SER.m"; path = "Helpers/UIColor+SER.m"; sourceTree = "<group>"; };
 		DA2DB4891881CEF50014042C /* SERContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERContentViewController.h; path = Base/SERContentViewController.h; sourceTree = "<group>"; };
 		DA2DB48A1881CEF50014042C /* SERContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERContentViewController.m; path = Base/SERContentViewController.m; sourceTree = "<group>"; };
+		DA2DB48E1881F7AC0014042C /* SERWishlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERWishlistViewController.h; path = Wishlist/SERWishlistViewController.h; sourceTree = "<group>"; };
+		DA2DB48F1881F7AC0014042C /* SERWishlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERWishlistViewController.m; path = Wishlist/SERWishlistViewController.m; sourceTree = "<group>"; };
+		DA2DB4911881F7C50014042C /* SERInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERInviteViewController.h; path = Invite/SERInviteViewController.h; sourceTree = "<group>"; };
+		DA2DB4921881F7C50014042C /* SERInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERInviteViewController.m; path = Invite/SERInviteViewController.m; sourceTree = "<group>"; };
+		DA2DB4941881FF050014042C /* durated-button-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button-highlighted.png"; sourceTree = "<group>"; };
+		DA2DB4951881FF050014042C /* durated-button-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button-highlighted@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +224,8 @@
 		DA2DB412188168510014042C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DA2DB48D1881F78B0014042C /* Wishlist */,
+				DA2DB48C1881F7860014042C /* Invite */,
 				DA2DB44618816B0E0014042C /* Base */,
 				DA2DB4851881B9CB0014042C /* Helpers */,
 				DA2DB43A188169E70014042C /* Market */,
@@ -271,6 +283,8 @@
 				DA2DB44C188170310014042C /* camera@2x.png */,
 				DA2DB44D188170310014042C /* durated-button.png */,
 				DA2DB44E188170310014042C /* durated-button@2x.png */,
+				DA2DB4941881FF050014042C /* durated-button-highlighted.png */,
+				DA2DB4951881FF050014042C /* durated-button-highlighted@2x.png */,
 				DA2DB44F188170310014042C /* invite.png */,
 				DA2DB450188170310014042C /* invite@2x.png */,
 				DA2DB451188170310014042C /* market.png */,
@@ -313,6 +327,24 @@
 				DA2DB4871881B9DF0014042C /* UIColor+SER.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		DA2DB48C1881F7860014042C /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB4911881F7C50014042C /* SERInviteViewController.h */,
+				DA2DB4921881F7C50014042C /* SERInviteViewController.m */,
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
+		DA2DB48D1881F78B0014042C /* Wishlist */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB48E1881F7AC0014042C /* SERWishlistViewController.h */,
+				DA2DB48F1881F7AC0014042C /* SERWishlistViewController.m */,
+			);
+			name = Wishlist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,6 +426,7 @@
 				DA2DB467188170310014042C /* profile.png in Resources */,
 				DA2DB463188170310014042C /* market.png in Resources */,
 				DA2DB469188170310014042C /* wishlist.png in Resources */,
+				DA2DB4971881FF050014042C /* durated-button-highlighted@2x.png in Resources */,
 				DA2DB46A188170310014042C /* wishlist@2x.png in Resources */,
 				DA2DB468188170310014042C /* profile@2x.png in Resources */,
 				DA2DB460188170310014042C /* durated-button@2x.png in Resources */,
@@ -408,6 +441,7 @@
 				DA2DB3F51881672C0014042C /* Images.xcassets in Resources */,
 				DA2DB466188170310014042C /* posts@2x.png in Resources */,
 				DA2DB45E188170310014042C /* camera@2x.png in Resources */,
+				DA2DB4961881FF050014042C /* durated-button-highlighted.png in Resources */,
 				DA2DB46C188170310014042C /* mock-posts@2x.png in Resources */,
 				DA2DB46D188170310014042C /* mock-profile@2x.jpg in Resources */,
 			);
@@ -429,12 +463,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2DB44518816AED0014042C /* SERProfileViewController.m in Sources */,
+				DA2DB4901881F7AC0014042C /* SERWishlistViewController.m in Sources */,
 				DA2DB4881881B9DF0014042C /* UIColor+SER.m in Sources */,
 				DA2DB4811881B69A0014042C /* SERDuratedMenu.m in Sources */,
 				DA2DB48B1881CEF50014042C /* SERContentViewController.m in Sources */,
 				DA2DB3EF1881672C0014042C /* main.m in Sources */,
 				DA2DB44918816B270014042C /* SERBaseViewController.m in Sources */,
 				DA2DB44118816ABC0014042C /* SERPostsViewController.m in Sources */,
+				DA2DB4931881F7C50014042C /* SERInviteViewController.m in Sources */,
 				DA2DB415188168510014042C /* SERAppDelegate.m in Sources */,
 				DA2DB4841881B6FF0014042C /* SERDuratedMenuItem.m in Sources */,
 				DA2DB43D18816A040014042C /* SERMarketViewController.m in Sources */,

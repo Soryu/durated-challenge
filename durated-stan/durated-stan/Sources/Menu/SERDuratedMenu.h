@@ -22,5 +22,6 @@
 @property (nonatomic, copy) NSArray *items;
 
 - (void)setImage:(UIImage *)image;
+- (void)setHighlightedImage:(UIImage *)image;
 
 @end
