@@ -11,8 +11,8 @@
 #import "UIColor+SER.h"
 
 static const CGFloat kButtonBottomMargin  = 20;
-static const CGFloat kAnimationDuration   = 0.25;
-static const CGFloat kButtonDisplacement  = 100;
+static const CGFloat kAnimationDuration   = 0.15;
+static const CGFloat kButtonDisplacement  = 90;
 static const CGFloat kMinimumDisplacement = 33;
 
 @interface SERDuratedMenu ()
@@ -182,11 +182,37 @@ static const CGFloat kMinimumDisplacement = 33;
   
   CGPoint center = self.mainButton.center;
   NSUInteger total = [self.itemButtons count];
-  for (NSUInteger index = 0; index < total; ++index)
+  
+  if (animated)
   {
-    UIButton *itemButton = self.itemButtons[index];
-    itemButton.center = [self positionForButtonAtIndex:index total:total center:center];
-    [self.contentView addSubview:itemButton];
+    for (UIButton *itemButton in self.itemButtons)
+    {
+      itemButton.center = center;
+      itemButton.alpha = 0.0;
+      [self.contentView addSubview:itemButton];
+    }
+    
+    CGFloat delay = 0.0;
+    CGFloat delayIncrement = kAnimationDuration / total;
+    for (NSUInteger index = 0; index < total; ++index)
+    {
+      UIButton *itemButton = self.itemButtons[index];
+      [UIView animateWithDuration:kAnimationDuration delay:delay options:UIViewAnimationOptionCurveEaseOut animations:^{
+        itemButton.center = [self positionForButtonAtIndex:index total:total center:center];
+        itemButton.alpha = 1.0;
+      } completion:NULL];
+      delay += delayIncrement;
+    }
+  }
+  else
+  {
+    for (NSUInteger index = 0; index < total; ++index)
+    {
+      UIButton *itemButton = self.itemButtons[index];
+      itemButton.alpha = 1.0;
+      itemButton.center = [self positionForButtonAtIndex:index total:total center:center];
+      [self.contentView addSubview:itemButton];
+    }
   }
 }
 
@@ -200,9 +226,30 @@ static const CGFloat kMinimumDisplacement = 33;
 
   self.isOpen = NO;
   
-  for (UIView *view in self.contentView.subviews)
+  if (animated)
   {
-    [view removeFromSuperview];
+    NSUInteger total = [self.itemButtons count];
+    CGFloat delay = 0.0;
+    CGFloat delayIncrement = kAnimationDuration / total;
+    CGPoint center = self.mainButton.center;
+    for (UIButton *itemButton in self.itemButtons.reverseObjectEnumerator)
+    {
+      [UIView animateWithDuration:kAnimationDuration delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
+        itemButton.center = center;
+        itemButton.alpha = 0.0;
+      } completion:^(BOOL finished) {
+        itemButton.alpha = 1.0;
+        [itemButton removeFromSuperview];
+      }];
+      delay += delayIncrement;
+    }
+  }
+  else
+  {
+    for (UIView *view in self.contentView.subviews)
+    {
+      [view removeFromSuperview];
+    }
   }
 }
 
