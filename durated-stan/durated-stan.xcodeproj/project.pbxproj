@@ -40,6 +40,10 @@
 		DA2DB46B188170310014042C /* mock-market@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45A188170310014042C /* mock-market@2x.jpg */; };
 		DA2DB46C188170310014042C /* mock-posts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45B188170310014042C /* mock-posts@2x.png */; };
 		DA2DB46D188170310014042C /* mock-profile@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB45C188170310014042C /* mock-profile@2x.jpg */; };
+		DA2DB4811881B69A0014042C /* SERDuratedMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4801881B69A0014042C /* SERDuratedMenu.m */; };
+		DA2DB4841881B6FF0014042C /* SERDuratedMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4831881B6FF0014042C /* SERDuratedMenuItem.m */; };
+		DA2DB4881881B9DF0014042C /* UIColor+SER.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4871881B9DF0014042C /* UIColor+SER.m */; };
+		DA2DB48B1881CEF50014042C /* SERContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB48A1881CEF50014042C /* SERContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +98,14 @@
 		DA2DB45A188170310014042C /* mock-market@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mock-market@2x.jpg"; sourceTree = "<group>"; };
 		DA2DB45B188170310014042C /* mock-posts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mock-posts@2x.png"; sourceTree = "<group>"; };
 		DA2DB45C188170310014042C /* mock-profile@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mock-profile@2x.jpg"; sourceTree = "<group>"; };
+		DA2DB47F1881B69A0014042C /* SERDuratedMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERDuratedMenu.h; path = Menu/SERDuratedMenu.h; sourceTree = "<group>"; };
+		DA2DB4801881B69A0014042C /* SERDuratedMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERDuratedMenu.m; path = Menu/SERDuratedMenu.m; sourceTree = "<group>"; };
+		DA2DB4821881B6FF0014042C /* SERDuratedMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERDuratedMenuItem.h; path = Menu/SERDuratedMenuItem.h; sourceTree = "<group>"; };
+		DA2DB4831881B6FF0014042C /* SERDuratedMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERDuratedMenuItem.m; path = Menu/SERDuratedMenuItem.m; sourceTree = "<group>"; };
+		DA2DB4861881B9DF0014042C /* UIColor+SER.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+SER.h"; path = "Helpers/UIColor+SER.h"; sourceTree = "<group>"; };
+		DA2DB4871881B9DF0014042C /* UIColor+SER.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+SER.m"; path = "Helpers/UIColor+SER.m"; sourceTree = "<group>"; };
+		DA2DB4891881CEF50014042C /* SERContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERContentViewController.h; path = Base/SERContentViewController.h; sourceTree = "<group>"; };
+		DA2DB48A1881CEF50014042C /* SERContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERContentViewController.m; path = Base/SERContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				DA2DB44618816B0E0014042C /* Base */,
+				DA2DB4851881B9CB0014042C /* Helpers */,
 				DA2DB43A188169E70014042C /* Market */,
+				DA2DB4721881AF4E0014042C /* Menu */,
 				DA2DB43E18816AAB0014042C /* Posts */,
 				DA2DB44218816ADD0014042C /* Profile */,
 				DA2DB413188168510014042C /* SERAppDelegate.h */,
@@ -244,6 +258,8 @@
 			children = (
 				DA2DB44718816B270014042C /* SERBaseViewController.h */,
 				DA2DB44818816B270014042C /* SERBaseViewController.m */,
+				DA2DB4891881CEF50014042C /* SERContentViewController.h */,
+				DA2DB48A1881CEF50014042C /* SERContentViewController.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -277,6 +293,26 @@
 				DA2DB45C188170310014042C /* mock-profile@2x.jpg */,
 			);
 			path = mocks;
+			sourceTree = "<group>";
+		};
+		DA2DB4721881AF4E0014042C /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB47F1881B69A0014042C /* SERDuratedMenu.h */,
+				DA2DB4801881B69A0014042C /* SERDuratedMenu.m */,
+				DA2DB4821881B6FF0014042C /* SERDuratedMenuItem.h */,
+				DA2DB4831881B6FF0014042C /* SERDuratedMenuItem.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		DA2DB4851881B9CB0014042C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DA2DB4861881B9DF0014042C /* UIColor+SER.h */,
+				DA2DB4871881B9DF0014042C /* UIColor+SER.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,10 +429,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2DB44518816AED0014042C /* SERProfileViewController.m in Sources */,
+				DA2DB4881881B9DF0014042C /* UIColor+SER.m in Sources */,
+				DA2DB4811881B69A0014042C /* SERDuratedMenu.m in Sources */,
+				DA2DB48B1881CEF50014042C /* SERContentViewController.m in Sources */,
 				DA2DB3EF1881672C0014042C /* main.m in Sources */,
 				DA2DB44918816B270014042C /* SERBaseViewController.m in Sources */,
 				DA2DB44118816ABC0014042C /* SERPostsViewController.m in Sources */,
 				DA2DB415188168510014042C /* SERAppDelegate.m in Sources */,
+				DA2DB4841881B6FF0014042C /* SERDuratedMenuItem.m in Sources */,
 				DA2DB43D18816A040014042C /* SERMarketViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

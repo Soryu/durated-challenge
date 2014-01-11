@@ -1,5 +1,5 @@
 //
-//  SERPostsViewController.h
+//  UIColor+SER.h
 //  durated-stan
 //
 //  Created by Stanley Rost on 11.01.14.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SERContentViewController.h"
 
-@interface SERPostsViewController : SERContentViewController
-
+@interface UIColor (SER)
++ (UIColor *)colorFromHexString:(NSString *)hexString;
 @end

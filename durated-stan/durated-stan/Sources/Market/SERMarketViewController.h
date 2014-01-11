@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SERContentViewController.h"
 
-@interface SERMarketViewController : UIViewController
+@interface SERMarketViewController : SERContentViewController
 
 @end

@@ -10,8 +10,10 @@
 #import "SERMarketViewController.h"
 #import "SERPostsViewController.h"
 #import "SERProfileViewController.h"
+#import "SERDuratedMenu.h"
+#import "SERDuratedMenuItem.h"
+#import "SERContentViewController.h"
 
-static const CGFloat kButtonBottomMargin = 20;
 static const CGFloat kAnimationDuration = 0.25;
 
 typedef NS_ENUM(NSInteger, SERAnimation) {
@@ -20,21 +22,20 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   SERAnimationRight,
 };
 
-@interface SERBaseViewController ()
+@interface SERBaseViewController () <SERDuratedMenuDelegate>
 
 // UI
 
 @property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) UIButton *menuButton;
+@property (nonatomic, strong) SERDuratedMenu *menu;
 
 // Actions
-
-- (void)menuButtonPressed:(id)sender;
 
 // Content
 
 @property (nonatomic, strong) UIViewController         *currentController;
-@property (nonatomic, strong) UIViewController         *contentController;
+@property (nonatomic, strong) SERContentViewController *contentController;
+
 @property (nonatomic, strong) SERMarketViewController  *marketController;
 @property (nonatomic, strong) SERPostsViewController   *postsController;
 @property (nonatomic, strong) SERProfileViewController *profileController;
@@ -53,7 +54,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [self.view addSubview:self.contentView];
   
-  [self.view addSubview:self.menuButton];
+  [self.view addSubview:self.menu];
 
 #warning DEBUG colored backgrounds for debugging
   self.view.backgroundColor = [UIColor redColor];
@@ -67,36 +68,30 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   [self setContentController:self.defaultContentController animation:SERAnimationNone];
 }
 
-- (void)viewDidLayoutSubviews
-{
-  [super viewDidLayoutSubviews];
-  
-  self.menuButton.center = ({
-    CGRect frame      = self.menuButton.frame;
-    CGRect superFrame = self.menuButton.superview.frame;
-
-    CGPoint center;
-    center.x = CGRectGetMidX(superFrame);
-    center.y = CGRectGetHeight(superFrame) - CGRectGetHeight(frame) / 2 - kButtonBottomMargin;
-    center;
-  });
-}
-
 
 #pragma mark UI
 
-- (UIButton *)menuButton
+- (SERDuratedMenu *)menu
 {
-  if (!_menuButton)
+  if (!_menu)
   {
-    _menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_menuButton setImage:[UIImage imageNamed:@"durated-button"] forState:UIControlStateNormal];
-    [_menuButton sizeToFit];
+    _menu = [[SERDuratedMenu alloc] initWithFrame:self.view.bounds];
+    _menu.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    _menu.image = [UIImage imageNamed:@"durated-button"];
+    _menu.items = @[
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile],
+      // [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"] tag:SERMenuTagMarket],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"] tag:SERMenuTagInvite],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"] tag:SERMenuTagCamera],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"] tag:SERMenuTagPosts],
+    ];
     
-    [_menuButton addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    _menu.delegate = self;
   }
   
-  return _menuButton;
+  return _menu;
 }
 
 
@@ -105,7 +100,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 - (void)menuButtonPressed:(id)sender
 {
   // NOTE test code just to have something working
-  UIViewController *newController = nil;
+  SERContentViewController *newController = nil;
   
   if (self.contentController == self.marketController)
   {
@@ -126,12 +121,9 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 
 #pragma mark content controllers
 
-- (void)setContentController:(UIViewController *)newController animation:(SERAnimation)animation
+- (void)setContentController:(SERContentViewController *)contentController animation:(SERAnimation)animation
 {
-  UIViewController *contentController = newController;
-  if ([newController respondsToSelector:@selector(topViewController)])
-    contentController = [newController performSelector:@selector(topViewController)];
-  
+  UIViewController *newController = [self viewControllerForContentController:contentController];
   UIViewController *oldController = self.currentController;
 
   self.currentController = newController;
@@ -188,9 +180,44 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
     }];
   }
   
+  if (contentController.tag == SERMenuTagMarket)
+  {
+    self.menu.items = @[
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"]  tag:SERMenuTagProfile],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]    tag:SERMenuTagPosts],
+    ];    
+  }
+  else if (contentController.tag == SERMenuTagProfile)
+  {
+    self.menu.items = @[
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]    tag:SERMenuTagPosts],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]   tag:SERMenuTagMarket],
+    ];    
+  }
+  else if (contentController.tag == SERMenuTagPosts)
+  {
+    self.menu.items = @[
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]   tag:SERMenuTagMarket],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+      [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"]  tag:SERMenuTagProfile],
+    ];    
+  }  
 }
 
-- (UIViewController *)defaultContentController
+- (void)showCamera
+{
+  DLog(@".");
+}
+
+- (SERContentViewController *)defaultContentController
 {
   return [self marketController];
 }
@@ -200,6 +227,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_marketController)
   {
     _marketController = [SERMarketViewController new];
+    _marketController.tag = SERMenuTagMarket;
   }
   
   return _marketController;
@@ -210,6 +238,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_postsController)
   {
     _postsController = [SERPostsViewController new];
+    _postsController.tag = SERMenuTagPosts;
   }
   
   return _postsController;
@@ -220,11 +249,90 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_profileController)
   {
     _profileController = [SERProfileViewController new];
+    _profileController.tag = SERMenuTagProfile;
   }
   
   return _profileController;
 }
 
+- (UIViewController *)viewControllerForContentController:(SERContentViewController *)contentController
+{
+  UIViewController *controller = contentController;
+  
+  // e.g.
+  // if (contentController.tag == SERMenuTagProfile)
+  // {
+  //   controller = [[UINavigationController alloc] initWithRootViewController:contentController];
+  // }
+  
+  return controller;
+}
+
+#pragma mark SERDuratedMenuDelegate
+
+- (void)menu:(SERDuratedMenu *)menu didSelectItem:(SERDuratedMenuItem *)item
+{
+  DLog(@"%d %@", item.tag, item);
+  
+  if (item.tag == SERMenuTagCamera)
+  {
+    [self showCamera];
+  }
+  else if (item.tag == SERMenuTagInvite)
+  {
+    // TODO invite
+  }
+  else if (item.tag == SERMenuTagWishlist)
+  {
+    // TODO wishlist
+  }
+  else
+  {
+    [self switchToControllerForTag:item.tag fromController:self.contentController];
+  }
+}
+
+- (void)switchToControllerForTag:(SERMenuTag)tag fromController:(SERContentViewController *)oldController
+{
+  SERContentViewController *newController = nil;
+  if (tag == SERMenuTagPosts)
+  {
+    newController = self.postsController;
+  }
+  else if (tag == SERMenuTagProfile)
+  {
+    newController = self.profileController;
+  }
+  else if (tag == SERMenuTagMarket)
+  {
+    newController = self.marketController;
+  }
+  
+  NSAssert(oldController != newController, @"old and new controllers must be different: %@", newController);
+  
+  // TODO oh come on, this is too complex just to get the animation direction
+  NSArray *order = @[@(SERMenuTagMarket), @(SERMenuTagPosts), @(SERMenuTagProfile)];
+  
+  NSUInteger oldIndex = [order indexOfObject:@(oldController.tag)];
+  NSUInteger newIndex = [order indexOfObject:@(newController.tag)];
+  
+  NSAssert(oldIndex != NSNotFound, @"old index not found");
+  NSAssert(newIndex != NSNotFound, @"new index not found");
+  
+  NSInteger direction = (NSInteger)newIndex - (NSInteger)oldIndex;
+  
+  if (direction > 1)
+  {
+    direction -= [order count];
+  }
+  else if (direction < 1)
+  {
+    direction += [order count];
+  }
+  
+  SERAnimation animation = direction == 1 ? SERAnimationRight : SERAnimationLeft;
+  [self setContentController:newController animation:animation];
+}
 
 #pragma status bar
 
