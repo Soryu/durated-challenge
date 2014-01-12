@@ -78,9 +78,18 @@ CGPoint _originalCenter;
   
   [NSObject cancelPreviousPerformRequestsWithTarget:self.delegate selector:@selector(startAutomaticMenu) object:nil];
   
-  [UIView animateWithDuration:kAnimationDuration delay:0 usingSpringWithDamping:0.66 initialSpringVelocity:0 options:0 animations:^{
-    self.transform = CGAffineTransformIdentity;
-  } completion:NULL];
+  if ([[UIView class] respondsToSelector:@selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)])
+  {
+    [UIView animateWithDuration:kAnimationDuration delay:0 usingSpringWithDamping:0.66 initialSpringVelocity:0 options:0 animations:^{
+      self.transform = CGAffineTransformIdentity;
+    } completion:NULL];
+  }
+  else
+  {
+    [UIView animateWithDuration:kAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      self.transform = CGAffineTransformIdentity;
+    } completion:NULL];
+  }
 }
 
 @end
