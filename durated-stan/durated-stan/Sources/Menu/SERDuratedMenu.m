@@ -8,21 +8,24 @@
 
 #import "SERDuratedMenu.h"
 #import "SERDuratedMenuItem.h"
+#import "SERDuratedMenuButton.h"
 
 static const CGFloat kButtonBottomMargin  = 20;
 static const CGFloat kAnimationDuration   = 0.15;
 static const CGFloat kButtonDisplacement  = 90;
-static const CGFloat kMinimumDisplacement = 33;
+static const CGFloat kMinimumDisplacement = 15;
 
-@interface SERDuratedMenu ()
+@interface SERDuratedMenu () <SERDuratedMenuButtonDelegate>
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSArray *itemButtons;
-@property (nonatomic, strong) UIButton *mainButton;
-@property (nonatomic, strong) UIPanGestureRecognizer *mainButtonPanRecognizer;
+@property (nonatomic, strong) SERDuratedMenuButton *mainButton;
 @property (nonatomic, strong) UITapGestureRecognizer *backgroundTapRecognizer;
 
 @property (nonatomic) BOOL isOpen;
+@property (nonatomic) BOOL automaticMenu;
+@property (nonatomic) UIButton *activeItemButton;
+
 @end
 
 @implementation SERDuratedMenu
@@ -38,9 +41,6 @@ static const CGFloat kMinimumDisplacement = 33;
     
     [self addSubview:self.contentView];
     [self addSubview:self.mainButton];
-    
-    self.mainButtonPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panningMainButton:)];
-    [self.mainButton addGestureRecognizer:self.mainButtonPanRecognizer];
     
     self.backgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedBackground:)];
     self.backgroundTapRecognizer.enabled = NO;
@@ -68,13 +68,13 @@ static const CGFloat kMinimumDisplacement = 33;
   });
 }
 
-- (UIButton *)mainButton
+- (SERDuratedMenuButton *)mainButton
 {
   if (!_mainButton)
   {
-    _mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_mainButton setTitle:@"Button" forState:UIControlStateNormal];
-    [_mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    _mainButton = [SERDuratedMenuButton new];
+    _mainButton.userInteractionEnabled = YES;
+    _mainButton.delegate = self;
   }
   
   return _mainButton;
@@ -103,30 +103,39 @@ static const CGFloat kMinimumDisplacement = 33;
 
 - (void)setImage:(UIImage *)image
 {
-  [self.mainButton setImage:image forState:UIControlStateNormal];
-  [self.mainButton setTitle:image ? nil : @"Button" forState:UIControlStateNormal];
+  [self.mainButton setImage:image];
 }
 
 - (void)setHighlightedImage:(UIImage *)image
 {
-  [self.mainButton setImage:image forState:UIControlStateHighlighted];
+  [self.mainButton setHighlightedImage:image];
 }
 
-#pragma mark Actions
+#pragma mark Automatic menu
 
-- (void)mainButtonPressed:(id)sender
+- (void)cancelAutomaticMenu
 {
-  if (self.isOpen)
+  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startAutomaticMenu) object:nil];
+  
+  if (self.automaticMenu)
   {
     [self closeMenuAnimated:YES];
+    self.automaticMenu = NO;
   }
-  else
+}
+
+- (void)startAutomaticMenu
+{
+  if (!self.isOpen)
   {
+    self.automaticMenu = YES;
     [self openMenuAnimated:YES];
   }
 }
 
-- (void)menuButtonPressed:(id)sender
+#pragma mark Actions
+
+- (void)itemButtonPressed:(id)sender
 {
   NSUInteger index = [self.itemButtons indexOfObject:sender];
   NSAssert(index != NSNotFound, @"menu button not found");
@@ -148,7 +157,7 @@ static const CGFloat kMinimumDisplacement = 33;
     [button setImage:item.highlightedImage forState:UIControlStateHighlighted];
   
   [button sizeToFit];
-  [button addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [button addTarget:self action:@selector(itemButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   return button;
 }
@@ -175,13 +184,37 @@ static const CGFloat kMinimumDisplacement = 33;
   return CGPointMake(center.x + x, center.y + y);
 }
 
+- (NSUInteger)indexForTranslation:(CGPoint)translation
+{
+  NSUInteger index = NSNotFound;
+  
+  CGFloat displacement = sqrt(translation.x * translation.x + translation.y * translation.y);
+  if (displacement >= kMinimumDisplacement)
+  {
+    const CGFloat offset = -0.01; // guard against wrap around extreme values might be wrong otherwise (bottom right corner)
+    
+    CGFloat angle = atan((translation.y + offset) / translation.x);
+    if (angle < 0) angle = M_PI + angle;
+    
+    CGFloat angleDistance = M_PI / ([self.items count] - 1); // distance between any two items
+    
+    index = (int)floor((angle - angleDistance / 2) / angleDistance + 1.0);
+  }
+
+  return index;
+}
+
+- (void)reset
+{
+  self.activeItemButton.highlighted = NO;
+  self.activeItemButton = nil;
+}
+
 #pragma mark Open/Close
 
 - (void)openMenuAnimated:(BOOL)animated
 {
   self.isOpen = YES;
-  
-  self.mainButtonPanRecognizer.enabled = NO;
   self.backgroundTapRecognizer.enabled = YES;
   
   CGPoint center = self.mainButton.center;
@@ -225,10 +258,8 @@ static const CGFloat kMinimumDisplacement = 33;
   if (!self.isOpen)
     return;
 
-  self.mainButtonPanRecognizer.enabled = YES;
-  self.backgroundTapRecognizer.enabled = NO;
-
   self.isOpen = NO;
+  self.backgroundTapRecognizer.enabled = NO;
   
   if (animated)
   {
@@ -257,6 +288,49 @@ static const CGFloat kMinimumDisplacement = 33;
   }
 }
 
+#pragma mark Delegate Protocol
+
+- (void)showActiveItemForTranslation:(CGPoint)translation
+{
+  NSUInteger index = [self indexForTranslation:translation];
+  
+  if (index != NSNotFound)
+  {
+    UIButton *itemButton = self.itemButtons[index];
+    
+    if (itemButton != self.activeItemButton)
+    {
+      self.activeItemButton.highlighted = NO;
+      itemButton.highlighted = YES;
+      self.activeItemButton = itemButton;
+    }
+  }
+  else
+  {
+    self.activeItemButton.highlighted = NO;
+    self.activeItemButton = nil;
+  }
+}
+
+- (void)fireActionForButtonWithTranslation:(CGPoint)translation
+{
+  NSUInteger index = [self indexForTranslation:translation];
+  
+  if (index != NSNotFound)
+  {
+    SERDuratedMenuItem *item = self.items[index];
+    [self.delegate menu:self didSelectItem:item];
+  }
+  
+  [self reset];
+}
+
+- (void)cancel
+{
+  [self closeMenuAnimated:YES];
+  [self reset];
+}
+
 #pragma mark UITapGestureRecognizer
 
 - (void)tappedBackground:(UITapGestureRecognizer *)recognizer
@@ -265,82 +339,6 @@ static const CGFloat kMinimumDisplacement = 33;
   {
     [self closeMenuAnimated:YES];
   }
-}
-
-#pragma mark UIPangestureRecognizer
-
-- (void)panningMainButton:(UIPanGestureRecognizer *)recognizer
-{
-  UIView *view = recognizer.view;
-  NSAssert(view == self.mainButton, @"panning something other than the main button");
-  
-  if (recognizer.state == UIGestureRecognizerStateBegan)
-  {
-    // TODO: show actions after the user plays around with the button for more than half a second?
-  }
-  else if (recognizer.state == UIGestureRecognizerStateChanged)
-  {
-    CGPoint translation = [recognizer translationInView:view];
-
-    // TODO restrict button movement to a half circle around the center
-    CGPoint cleanedTranslation = [self boundedTranslationForTranslation:translation];
-    view.transform = CGAffineTransformMakeTranslation(cleanedTranslation.x, cleanedTranslation.y);
-
-    // if showing actions above then we'd need to highlight the current one
-  }
-  else if (recognizer.state == UIGestureRecognizerStateEnded)
-  {
-    CGPoint translation = [recognizer translationInView:view];
-    [self fireActionForButtonWithTranslation:translation];
-  }
-  else if (recognizer.state == UIGestureRecognizerStateCancelled)
-  {
-    [self resetMainButton];
-  }
-}
-
-- (void)fireActionForButtonWithTranslation:(CGPoint)translation
-{
-  [self resetMainButton];
-  
-  CGPoint cleanTranslation = [self boundedTranslationForTranslation:translation];
-  
-  CGFloat displacement = sqrt(cleanTranslation.x * cleanTranslation.x + cleanTranslation.y * cleanTranslation.y);
-  if (displacement >= kMinimumDisplacement)
-  {
-    NSUInteger index = [self indexForTranslation:cleanTranslation];
-    SERDuratedMenuItem *item = self.items[index];
-    
-    [self.delegate menu:self didSelectItem:item];
-  }
-}
-
-- (void)resetMainButton
-{
-  [UIView animateWithDuration:kAnimationDuration animations:^{
-    self.mainButton.transform = CGAffineTransformIdentity;
-  }];
-}
-
-- (CGPoint)boundedTranslationForTranslation:(CGPoint)translation
-{
-  CGFloat cleanX = fmax(-kButtonDisplacement, fmin(kButtonDisplacement, translation.x));
-  CGFloat cleanY = fmax(-kButtonDisplacement, fmin(0, translation.y));
-  
-  return CGPointMake(cleanX, cleanY);
-}
-
-- (NSUInteger)indexForTranslation:(CGPoint)translation
-{
-  const CGFloat offset = -0.01; // guard against wrap around extreme values might be wrong otherwise (bottom right corner)
-
-  CGFloat angle = atan((translation.y + offset) / translation.x);
-  if (angle < 0) angle = M_PI + angle;
-
-  CGFloat angleDistance = M_PI / ([self.items count] - 1); // distance between any two items
-  
-  NSUInteger segmentIndex = (int)floor((angle - angleDistance / 2) / angleDistance + 1.0);
-  return segmentIndex;
 }
 
 @end

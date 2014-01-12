@@ -48,6 +48,7 @@
 		DA2DB4931881F7C50014042C /* SERInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4921881F7C50014042C /* SERInviteViewController.m */; };
 		DA2DB4961881FF050014042C /* durated-button-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB4941881FF050014042C /* durated-button-highlighted.png */; };
 		DA2DB4971881FF050014042C /* durated-button-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB4951881FF050014042C /* durated-button-highlighted@2x.png */; };
+		DA2DB49A1882C7CA0014042C /* SERDuratedMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB4991882C7CA0014042C /* SERDuratedMenuButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,8 @@
 		DA2DB4921881F7C50014042C /* SERInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERInviteViewController.m; path = Invite/SERInviteViewController.m; sourceTree = "<group>"; };
 		DA2DB4941881FF050014042C /* durated-button-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button-highlighted.png"; sourceTree = "<group>"; };
 		DA2DB4951881FF050014042C /* durated-button-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button-highlighted@2x.png"; sourceTree = "<group>"; };
+		DA2DB4981882C7CA0014042C /* SERDuratedMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERDuratedMenuButton.h; path = Menu/SERDuratedMenuButton.h; sourceTree = "<group>"; };
+		DA2DB4991882C7CA0014042C /* SERDuratedMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERDuratedMenuButton.m; path = Menu/SERDuratedMenuButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +317,8 @@
 			children = (
 				DA2DB47F1881B69A0014042C /* SERDuratedMenu.h */,
 				DA2DB4801881B69A0014042C /* SERDuratedMenu.m */,
+				DA2DB4981882C7CA0014042C /* SERDuratedMenuButton.h */,
+				DA2DB4991882C7CA0014042C /* SERDuratedMenuButton.m */,
 				DA2DB4821881B6FF0014042C /* SERDuratedMenuItem.h */,
 				DA2DB4831881B6FF0014042C /* SERDuratedMenuItem.m */,
 			);
@@ -464,6 +469,7 @@
 			files = (
 				DA2DB44518816AED0014042C /* SERProfileViewController.m in Sources */,
 				DA2DB4901881F7AC0014042C /* SERWishlistViewController.m in Sources */,
+				DA2DB49A1882C7CA0014042C /* SERDuratedMenuButton.m in Sources */,
 				DA2DB4881881B9DF0014042C /* UIColor+SER.m in Sources */,
 				DA2DB4811881B69A0014042C /* SERDuratedMenu.m in Sources */,
 				DA2DB48B1881CEF50014042C /* SERContentViewController.m in Sources */,
