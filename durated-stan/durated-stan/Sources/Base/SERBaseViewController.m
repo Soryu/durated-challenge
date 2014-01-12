@@ -261,7 +261,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
     controller = [SERWishlistViewController new];
   }
   
-  NSAssert(controller, @"cound not figure out controller for tag: %lu", tag);
+  NSAssert(controller, @"cound not figure out controller for tag: %ld", tag);
   
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
   [self presentViewController:navigationController animated:YES completion:NULL];
