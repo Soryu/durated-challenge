@@ -23,5 +23,6 @@
 @interface SERDuratedMenuButton : UIImageView
 
 @property (nonatomic, weak) NSObject<SERDuratedMenuButtonDelegate> *delegate;
+@property (nonatomic) CGFloat movementRadius;
 
 @end

@@ -75,6 +75,7 @@ static const CGFloat kMinimumDisplacement = 15;
     _mainButton = [SERDuratedMenuButton new];
     _mainButton.userInteractionEnabled = YES;
     _mainButton.delegate = self;
+    _mainButton.movementRadius = kButtonDisplacement;
   }
   
   return _mainButton;

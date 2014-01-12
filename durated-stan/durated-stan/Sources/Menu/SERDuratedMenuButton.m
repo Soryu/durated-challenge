@@ -13,15 +13,19 @@ static const CGFloat kAnimationDuration = 0.25;
 
 @implementation SERDuratedMenuButton
 
+// state as ivars w/o properties for speed, touch methods are called in quick succession
 BOOL _isTouching;
 BOOL _hasMoved;
+CGPoint _originalCenter;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
   _isTouching = YES;
   _hasMoved = NO;
+  _originalCenter = self.center;
+
   self.highlighted = YES;
-  
+
   [self.delegate performSelector:@selector(startAutomaticMenu) withObject:nil afterDelay:kAutomaticMenuDelay];
 }
 
@@ -30,19 +34,16 @@ BOOL _hasMoved;
   _hasMoved = YES;
   UITouch *touch = [touches anyObject];
   
-  CGPoint location = [touch locationInView:self];
-  CGPoint previousLocation = [touch previousLocationInView:self];
+  CGPoint superLocation = [touch locationInView:self.superview];
+  CGPoint offset = CGPointMake(superLocation.x - _originalCenter.x, superLocation.y - _originalCenter.y);
   
-  CGFloat dx = location.x - previousLocation.x;
-  CGFloat dy = location.y - previousLocation.y;
+  // restrict movement to semi circle area
+  offset.x = fmax(-_movementRadius, fmin(_movementRadius, offset.x));
+  CGFloat maxY = sqrt(_movementRadius * _movementRadius - offset.x * offset.x);
+  offset.y = fmax(-maxY, fmin(0, offset.y));
+  self.transform = CGAffineTransformMakeTranslation(offset.x, offset.y);
   
-  // TODO restrict movement to semi circle of the menu
-  
-  CGAffineTransform transform = CGAffineTransformTranslate(self.transform, dx, dy);
-  transform.ty = fmin(0, transform.ty);
-  self.transform = transform;
-  
-  [self.delegate showActiveItemForTranslation:CGPointMake(self.transform.tx, self.transform.ty)];
+  [self.delegate showActiveItemForTranslation:offset];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
