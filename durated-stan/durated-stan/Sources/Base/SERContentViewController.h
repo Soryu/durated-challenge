@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-// FIXME rename to content tag or such
-typedef NS_ENUM(NSInteger, SERMenuTag) {
-  SERMenuTagProfile,
-  SERMenuTagPosts,
-  SERMenuTagMarket,
-  SERMenuTagCamera,
-  SERMenuTagInvite,
-  SERMenuTagWishlist,
+typedef NS_ENUM(NSInteger, SERContentTag) {
+  SERContentTagProfile,
+  SERContentTagPosts,
+  SERContentTagMarket,
+  SERContentTagCamera,
+  SERContentTagInvite,
+  SERContentTagWishlist,
 };
 
 @interface SERContentViewController : UIViewController
 
-@property (nonatomic) SERMenuTag tag;
+@property (nonatomic) SERContentTag tag;
 
 @end

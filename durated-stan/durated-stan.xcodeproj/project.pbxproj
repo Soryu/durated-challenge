@@ -85,7 +85,7 @@
 		DA2DB44318816AED0014042C /* SERProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERProfileViewController.h; path = Profile/SERProfileViewController.h; sourceTree = "<group>"; };
 		DA2DB44418816AED0014042C /* SERProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERProfileViewController.m; path = Profile/SERProfileViewController.m; sourceTree = "<group>"; };
 		DA2DB44718816B270014042C /* SERBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SERBaseViewController.h; path = Base/SERBaseViewController.h; sourceTree = "<group>"; };
-		DA2DB44818816B270014042C /* SERBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SERBaseViewController.m; path = Base/SERBaseViewController.m; sourceTree = "<group>"; };
+		DA2DB44818816B270014042C /* SERBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SERBaseViewController.m; path = Base/SERBaseViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA2DB44B188170310014042C /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		DA2DB44C188170310014042C /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 		DA2DB44D188170310014042C /* durated-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "durated-button.png"; sourceTree = "<group>"; };

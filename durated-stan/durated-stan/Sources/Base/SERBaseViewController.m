@@ -178,29 +178,29 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   SERDuratedMenuItem *firstItem = nil;
   SERDuratedMenuItem *lastItem  = nil;
   
-  if (contentController.tag == SERMenuTagMarket)
+  if (contentController.tag == SERContentTagMarket)
   {
-    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile];
-    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]   tag:SERMenuTagPosts];
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERContentTagProfile];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]   tag:SERContentTagPosts];
   }
-  else if (contentController.tag == SERMenuTagProfile)
+  else if (contentController.tag == SERContentTagProfile)
   {
-    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]  tag:SERMenuTagPosts];
-    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"] tag:SERMenuTagMarket];
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"posts"]  tag:SERContentTagPosts];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"] tag:SERContentTagMarket];
   }
-  else if (contentController.tag == SERMenuTagPosts)
+  else if (contentController.tag == SERContentTagPosts)
   {
-    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]  tag:SERMenuTagMarket];
-    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERMenuTagProfile];
+    firstItem = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"market"]  tag:SERContentTagMarket];
+    lastItem  = [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"profile"] tag:SERContentTagProfile];
   }
   
   NSAssert(firstItem && lastItem, @"items must be set");
   
   self.menu.items = @[
     firstItem,
-    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERMenuTagInvite],
-    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERMenuTagCamera],
-    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERMenuTagWishlist],
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"invite"]   tag:SERContentTagInvite],
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"camera"]   tag:SERContentTagCamera],
+    [[SERDuratedMenuItem alloc] initWithImage:[UIImage imageNamed:@"wishlist"] tag:SERContentTagWishlist],
     lastItem,
   ];
 
@@ -248,15 +248,15 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   [self presentViewController:picker animated:YES completion:completionBlock];
 }
 
-- (void)showModalControllerForTag:(SERMenuTag)tag
+- (void)showModalControllerForTag:(SERContentTag)tag
 {
   UIViewController *controller = nil;
   
-  if (tag == SERMenuTagInvite)
+  if (tag == SERContentTagInvite)
   {
     controller = [SERInviteViewController new];
   }
-  else if (tag == SERMenuTagWishlist)
+  else if (tag == SERContentTagWishlist)
   {
     controller = [SERWishlistViewController new];
   }
@@ -280,7 +280,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_marketController)
   {
     _marketController = [SERMarketViewController new];
-    _marketController.tag = SERMenuTagMarket;
+    _marketController.tag = SERContentTagMarket;
   }
   
   return _marketController;
@@ -291,7 +291,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_postsController)
   {
     _postsController = [SERPostsViewController new];
-    _postsController.tag = SERMenuTagPosts;
+    _postsController.tag = SERContentTagPosts;
   }
   
   return _postsController;
@@ -302,7 +302,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   if (!_profileController)
   {
     _profileController = [SERProfileViewController new];
-    _profileController.tag = SERMenuTagProfile;
+    _profileController.tag = SERContentTagProfile;
   }
   
   return _profileController;
@@ -313,7 +313,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   UIViewController *controller = contentController;
   
   // e.g.
-  // if (contentController.tag == SERMenuTagProfile)
+  // if (contentController.tag == SERContentTagProfile)
   // {
   //   controller = [[UINavigationController alloc] initWithRootViewController:contentController];
   // }
@@ -325,11 +325,11 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 
 - (void)menu:(SERDuratedMenu *)menu didSelectItem:(SERDuratedMenuItem *)item
 {
-  if (item.tag == SERMenuTagCamera)
+  if (item.tag == SERContentTagCamera)
   {
     [self prepareToShowCamera];
   }
-  else if (item.tag == SERMenuTagInvite || item.tag == SERMenuTagWishlist)
+  else if (item.tag == SERContentTagInvite || item.tag == SERContentTagWishlist)
   {
     [self showModalControllerForTag:item.tag];
   }
@@ -339,18 +339,18 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   }
 }
 
-- (void)switchToControllerForTag:(SERMenuTag)tag fromController:(SERContentViewController *)oldController
+- (void)switchToControllerForTag:(SERContentTag)tag fromController:(SERContentViewController *)oldController
 {
   SERContentViewController *newController = nil;
-  if (tag == SERMenuTagPosts)
+  if (tag == SERContentTagPosts)
   {
     newController = self.postsController;
   }
-  else if (tag == SERMenuTagProfile)
+  else if (tag == SERContentTagProfile)
   {
     newController = self.profileController;
   }
-  else if (tag == SERMenuTagMarket)
+  else if (tag == SERContentTagMarket)
   {
     newController = self.marketController;
   }
@@ -358,7 +358,7 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   NSAssert(oldController != newController, @"old and new controllers must be different: %@", newController);
   
   // TODO oh come on, this is too complex just to get the animation direction
-  NSArray *order = @[@(SERMenuTagMarket), @(SERMenuTagPosts), @(SERMenuTagProfile)];
+  NSArray *order = @[@(SERContentTagMarket), @(SERContentTagPosts), @(SERContentTagProfile)];
   
   NSUInteger oldIndex = [order indexOfObject:@(oldController.tag)];
   NSUInteger newIndex = [order indexOfObject:@(newController.tag)];
