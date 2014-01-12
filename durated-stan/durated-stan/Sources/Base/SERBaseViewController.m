@@ -206,9 +206,31 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 
 }
 
-- (void)showCamera
+- (void)prepareToShowCamera
 {
-  // FIXME this is not smooth at all
+  // FIXME quick'n'dirty solution for delay when bringing up the camera
+  UIView *coverView = [UIView new];
+  coverView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+  coverView.frame = self.view.bounds;
+  [self.view addSubview:coverView];
+  
+  UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  [coverView addSubview:spinner];
+  spinner.center = CGPointMake(CGRectGetMidX(coverView.bounds), CGRectGetMidY(coverView.bounds));
+  [spinner startAnimating];
+  
+  // FIXME Quick hack to open the camera delayed so the button can animate back and the UI does not become unresponsive immediately
+  double delayInSeconds = 0.1;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    [self showCameraAndExecute:^{
+      [coverView removeFromSuperview];
+    }];
+  });
+}
+
+- (void)showCameraAndExecute:(void (^)())completionBlock
+{
   UIImagePickerController *picker = [UIImagePickerController new];
 
   if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -222,7 +244,30 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
   
   picker.delegate = self;
   picker.mediaTypes = @[(NSString *)kUTTypeImage];
-  [self presentViewController:picker animated:YES completion:nil];
+  
+  [self presentViewController:picker animated:YES completion:completionBlock];
+}
+
+- (void)showModalControllerForTag:(SERMenuTag)tag
+{
+  UIViewController *controller = nil;
+  
+  if (tag == SERMenuTagInvite)
+  {
+    controller = [SERInviteViewController new];
+  }
+  else if (tag == SERMenuTagWishlist)
+  {
+    controller = [SERWishlistViewController new];
+  }
+  
+  NSAssert(controller, @"cound not figure out controller for tag: %lu", tag);
+  
+  UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+  [self presentViewController:navigationController animated:YES completion:NULL];
+
+  UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPresentedController:)];
+  [controller.navigationItem setLeftBarButtonItem:item];
 }
 
 - (SERContentViewController *)defaultContentController
@@ -282,21 +327,11 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 {
   if (item.tag == SERMenuTagCamera)
   {
-    [self showCamera];
+    [self prepareToShowCamera];
   }
-  else if (item.tag == SERMenuTagInvite)
+  else if (item.tag == SERMenuTagInvite || item.tag == SERMenuTagWishlist)
   {
-    SERInviteViewController *inviteController = [SERInviteViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:inviteController];
-    [self presentViewController:navigationController animated:YES completion:NULL];
-    [self addGenericDismissButtonToPresentedController:inviteController];
-  }
-  else if (item.tag == SERMenuTagWishlist)
-  {
-    SERWishlistViewController *wishlistController = [SERWishlistViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:wishlistController];
-    [self presentViewController:navigationController animated:YES completion:NULL];
-    [self addGenericDismissButtonToPresentedController:wishlistController];
+    [self showModalControllerForTag:item.tag];
   }
   else
   {
@@ -371,12 +406,6 @@ typedef NS_ENUM(NSInteger, SERAnimation) {
 }
 
 #pragma mark Helpers
-
-- (void)addGenericDismissButtonToPresentedController:(UIViewController *)controller
-{
-  UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPresentedController:)];
-  [controller.navigationItem setLeftBarButtonItem:item];
-}
 
 - (void)dismissPresentedController:(id)sender
 {
